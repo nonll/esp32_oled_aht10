@@ -24,8 +24,6 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE, /* 
 
 // 0.96oled显示温湿度
 void oledDisplay(float temp,float humi);
-// aht10传感器获取数据 [指针传参]
-// void aht10(float *t,float *h);
 // aht10传感器获取数据 [引用传参]
 void aht10(float &t,float &h);
 
@@ -46,14 +44,11 @@ void setup() {
 }
 
 void loop() {
-  float temp,humi;    // 定义温度，湿度变量
-  // 测温湿度 
-  // aht10(&temp,&humi); // 指针传参
-  aht10(temp,humi);    // 引用传参
-  oledDisplay(temp,humi);    // oled显示温湿度
-  delay(1000);    // 延时1s
+  float temp,humi;         // 定义温度，湿度变量
+  aht10(temp,humi);        // 测温湿度 [引用传参]
+  oledDisplay(temp,humi);  // oled显示温湿度
+  delay(1000);             // 延时1s
 }
-
 
 void oledDisplay(float temp,float humi) {
   // u8g2.setFont(u8g2_font_unifont_t_chinese2);  // use chinese2 for all the glyphs of "你好世界"
@@ -81,16 +76,8 @@ void oledDisplay(float temp,float humi) {
   {
     u8g2.println("(T_T)");
   }
-
   u8g2.sendBuffer();
 }
-
-// void aht10(float *t,float *h){
-//     sensors_event_t humidity, temp;
-//     aht.getEvent(&humidity, &temp);// populate temp and humidity objects with fresh data
-//     *t = temp.temperature;
-//     *h= humidity.relative_humidity;
-// }
 
 void aht10(float &t,float &h){
     sensors_event_t humidity, temp;  // 定义传感器事件对象
