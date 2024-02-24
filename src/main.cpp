@@ -16,7 +16,6 @@ Adafruit_AHTX0 aht;
 
 // 初始化U8G2_SSD1306_128X64_NONAME_F_HW_I2C对象
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE, /* clock=*/ 22, /* data=*/ 21);
-
 // 初始化U8G2_SSD1306_128X64_NONAME_F_HW_I2C对象的参数说明：
 // U8G2_R0：U8G2的库类型
 // reset：复位引脚，此处设置为U8X8_PIN_NONE，表示不使用复位引脚
@@ -94,8 +93,8 @@ void oledDisplay(float temp,float humi) {
 // }
 
 void aht10(float &t,float &h){
-    sensors_event_t humidity, temp;   // 定义传感器事件对象
+    sensors_event_t humidity, temp;  // 定义传感器事件对象
     aht.getEvent(&humidity, &temp);  // 获取最新的温度和湿度数据
-    t = temp.temperature;    // 获取温度值
-    h= humidity.relative_humidity;    // 获取湿度值
+    t = temp.temperature;            // 获取温度值
+    h= humidity.relative_humidity;   // 获取湿度值
 }   
